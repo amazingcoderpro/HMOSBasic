@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "HMOS世界入门"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "HMOS世界入门"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "HMOS入门"
+    }
+  ]
+}

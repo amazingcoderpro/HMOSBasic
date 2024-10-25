@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "HMOS Basic Info"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "HMOS Basic Info"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "HMOS Basic"
+    }
+  ]
+}
