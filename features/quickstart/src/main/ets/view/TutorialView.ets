@@ -45,6 +45,7 @@ struct TutorialItem {
 @Preview
 @Component
 export struct TutorialView{
+  @Consume('articlePathStack') articlePathStack: NavPathStack;
   @State tutorialList: Array<ArticleClass> = [];
   //   [
   //   new ArticleClass('1', $r('app.media.tutorial_pic1'), 'Step1 环境的搭建',
@@ -103,7 +104,9 @@ export struct TutorialView{
         .padding({ left: 16 })
         .margin({ bottom: 8.5 })
       List({ space: 12 }) {
-        ForEach(this.tutorialList, (item: ArticleClass, index: number) => {ListItem(){TutorialItem({tutorialItem: item})}}, (item:ArticleClass)=>item.id)
+        ForEach(this.tutorialList, (item: ArticleClass, index: number) => {ListItem(){TutorialItem({tutorialItem: item}).onClick(() => {
+          this.articlePathStack.pushPathByName('articleDetail', item)
+        })}}, (item:ArticleClass)=>item.id)
       }
       .scrollBar(BarState.Off)
       .padding({ left: 16, right: 16 })

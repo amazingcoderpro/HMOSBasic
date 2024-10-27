@@ -7,6 +7,9 @@ export interface NavBarItemType {
 @Component
 export struct NavBarItem {
   @Prop navBarItem: NavBarItemType;
+  @Consume('knowledgeMapPageStack') knowledgeMapPageStack: NavPathStack;
+  @Link currentNavBarIndex: number;
+
   // = {
   //   order: '01',
   //   title: '准备与学习'
@@ -38,6 +41,13 @@ export struct NavBarItem {
     .borderRadius(16)
     .alignItems(VerticalAlign.Center)
     .padding({ left: 12, right: 12 })
-    .backgroundColor('#F1F3F5')
+    .backgroundColor(this.currentNavBarIndex === Number(this.navBarItem.order) - 1 ?
+      '#1A0A59F7' :
+    Color.Transparent)
+    .onClick(() => {
+      this.knowledgeMapPageStack.replacePath({ name: 'KnowledgeMapContent' });
+      const index =  Number(this.navBarItem.order)  - 1;
+      this.currentNavBarIndex = index;
+    })
   }
 }

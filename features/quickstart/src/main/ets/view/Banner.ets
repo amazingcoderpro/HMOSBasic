@@ -4,6 +4,7 @@ import {bufferToString} from '../util/BufferUtil';
 // @Preview
 @Component
 export struct Banner {
+  @Consume('articlePathStack') articlePathStack: NavPathStack;
   // @State bannerList: Array<BannerClass> = [
   //   new BannerClass('pic0', $r('app.media.banner_pic0'),
   //     'https://developer.huawei.com/consumer/cn/training/course/video/C101718352529709527'),
@@ -57,6 +58,9 @@ export struct Banner {
             .objectFit(ImageFit.Contain)
             .padding({ left: 16, right: 16, top: 11 })
             .borderRadius(16)
+            .onClick(() => {
+              this.articlePathStack.pushPathByName('bannerDetailPage', item);
+            })
         },
         (item: BannerClass, index: number) => item.id
       )

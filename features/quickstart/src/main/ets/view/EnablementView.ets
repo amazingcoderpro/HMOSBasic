@@ -6,6 +6,7 @@ struct EnablementItem{
   private title: string = 'HarmonyOS第一课';
   private brief: string = '基于真实的开发场景，提供向导式学习，多维度融合课程等内容，给开发者提供全新的学习体验。';
   @Prop enablementItem: ArticleClass;
+
   build() {
     Column() {
       // Image($r('app.media.enablement_pic1')).width('100%').objectFit(ImageFit.Cover).height(96).borderRadius({topLeft:16, bottomRight:16})
@@ -41,6 +42,7 @@ struct EnablementItem{
 @Component
 export struct EnablementView{
   @State enablementList: Array<ArticleClass> = [];
+  @Consume('articlePathStack') articlePathStack: NavPathStack;
   //   [
   //   new ArticleClass('1', $r('app.media.enablement_pic1'), 'HarmonyOS第一课',
   //     '基于真实的开发场景，提供向导式学习，多维度融合课程等内容，给开发者提供全新的学习体验。',
@@ -90,7 +92,9 @@ export struct EnablementView{
         .margin({ bottom: 8.5 })
 
       Grid() {
-        ForEach(this.enablementList, (item: ArticleClass, index: number) => {GridItem(){EnablementItem({enablementItem: item})}}, (item: ArticleClass)=>item.id)
+        ForEach(this.enablementList, (item: ArticleClass, index: number) => {GridItem(){EnablementItem({enablementItem: item}).onClick(() => {
+          this.articlePathStack.pushPathByName('articleDetail', item)
+        })}}, (item: ArticleClass)=>item.id)
 
       }
       .rowsTemplate('1fr')
