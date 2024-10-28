@@ -1,8 +1,5 @@
-## Title
-鸿蒙 OS 开发入门 (HarmonyOS Basic)
-## Version
-v1.0.2
-## Commit logs
+# 鸿蒙 OS 开发入门 (HarmonyOS Basic) V1.0.3
+## Release logs
 - 2024-10-26 使用MVVM三层架构调整代码组织，层次化、模块化代码结构，方便扩展和多人协同
 ![mvvm](./images/mvvm.jpg)
 - 2024-10-26 增加课程学习页面，通过 webview 加载课程学习页面
@@ -13,3 +10,4 @@ v1.0.2
 - 2024-10-28 增加TTS文本转语音能力
 ![tts](./images/tts_engine.png)
 - 2024-10-28 使用断点功能增加应用的多端显示的自适配能力
+- 2024-10-28 实现分布式流转能力
