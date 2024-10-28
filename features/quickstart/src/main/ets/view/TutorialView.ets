@@ -1,5 +1,6 @@
 import {ArticleClass} from '../model/ArticleClass';
 import {bufferToString} from '../util/BufferUtil';
+import { BreakpointType, BreakpointTypeEnum } from 'utils';
 
 
 // @Preview
@@ -47,6 +48,7 @@ struct TutorialItem {
 export struct TutorialView{
   @Consume('articlePathStack') articlePathStack: NavPathStack;
   @State tutorialList: Array<ArticleClass> = [];
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
   //   [
   //   new ArticleClass('1', $r('app.media.tutorial_pic1'), 'Step1 环境的搭建',
   //     '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
@@ -110,6 +112,10 @@ export struct TutorialView{
       }
       .scrollBar(BarState.Off)
       .padding({ left: 16, right: 16 })
+      .lanes(
+        new BreakpointType<number>({ sm: 1, md: 2, lg: 3 }).getValue(this.currentBreakpoint),
+        new BreakpointType<number>({ sm: 0, md: 12, lg: 16 }).getValue(this.currentBreakpoint)
+      )
     }
     .margin({ top: 18 })
     .alignItems(HorizontalAlign.Start)

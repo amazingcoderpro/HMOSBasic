@@ -1,10 +1,12 @@
 import {BannerClass} from '../model/BannerClass';
 import {bufferToString} from '../util/BufferUtil';
+import { BreakpointType, BreakpointTypeEnum } from 'utils';
 
 // @Preview
 @Component
 export struct Banner {
   @Consume('articlePathStack') articlePathStack: NavPathStack;
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
   // @State bannerList: Array<BannerClass> = [
   //   new BannerClass('pic0', $r('app.media.banner_pic0'),
   //     'https://developer.huawei.com/consumer/cn/training/course/video/C101718352529709527'),
@@ -64,6 +66,14 @@ export struct Banner {
         },
         (item: BannerClass, index: number) => item.id
       )
-    }.autoPlay(true).loop(true).indicator(new DotIndicator().color('#1a000000').selectedColor('#0A59F7'))
+    }.autoPlay(true).loop(true)
+    .displayCount(new BreakpointType({ sm: 1, md: 2, lg: 2 }).getValue(this.currentBreakpoint))
+    .displayMode(SwiperDisplayMode.STRETCH)
+    .indicator(this.currentBreakpoint === BreakpointTypeEnum.SM ?
+    Indicator.dot().
+    color('#1a000000').
+    selectedColor('#0A59F7') :
+      false)
+    .nextMargin(new BreakpointType<Length>({ sm: 0, md: 12, lg: 266 }).getValue(this.currentBreakpoint))
   }
 }

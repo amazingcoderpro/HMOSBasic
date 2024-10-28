@@ -1,5 +1,6 @@
 import {ArticleClass} from '../model/ArticleClass';
 import {bufferToString} from '../util/BufferUtil'
+import { BreakpointType, BreakpointTypeEnum } from 'utils';
 
 @Component
 struct EnablementItem{
@@ -43,6 +44,8 @@ struct EnablementItem{
 export struct EnablementView{
   @State enablementList: Array<ArticleClass> = [];
   @Consume('articlePathStack') articlePathStack: NavPathStack;
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
+
   //   [
   //   new ArticleClass('1', $r('app.media.enablement_pic1'), 'HarmonyOS第一课',
   //     '基于真实的开发场景，提供向导式学习，多维度融合课程等内容，给开发者提供全新的学习体验。',
@@ -92,9 +95,13 @@ export struct EnablementView{
         .margin({ bottom: 8.5 })
 
       Grid() {
-        ForEach(this.enablementList, (item: ArticleClass, index: number) => {GridItem(){EnablementItem({enablementItem: item}).onClick(() => {
+        ForEach(this.enablementList, (item: ArticleClass, index: number) => {
+          GridItem(){
+            EnablementItem({enablementItem: item}).onClick(() => {
           this.articlePathStack.pushPathByName('articleDetail', item)
-        })}}, (item: ArticleClass)=>item.id)
+            })
+          }.width(new BreakpointType<Length>({ sm: 160, md: 164, lg: 180 }).getValue(this.currentBreakpoint))
+        }, (item: ArticleClass)=>item.id)
 
       }
       .rowsTemplate('1fr')

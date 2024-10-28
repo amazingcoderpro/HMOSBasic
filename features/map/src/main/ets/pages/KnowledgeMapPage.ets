@@ -77,7 +77,8 @@ export struct KnowledgeMapPage {
       .edgeEffect(EdgeEffect.Spring)
     }.hideTitleBar(true)
     .navDestination(this.PageMap)
-    .mode(NavigationMode.Stack)
+    // .mode(NavigationMode.Stack)
+    .mode(NavigationMode.Auto)
 
 
   }

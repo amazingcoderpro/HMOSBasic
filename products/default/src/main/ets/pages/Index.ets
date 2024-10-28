@@ -2,6 +2,7 @@ import { QuickStartPage } from 'quickstart';
 import { CourseLearning } from 'learning';
 import { KnowledgeMapPage } from 'map';
 import { KnowledgeMapContent } from 'map';
+import { BreakpointSystem, BreakpointTypeEnum, BreakpointType } from 'utils';
 
 @Preview
 @Entry
@@ -10,6 +11,9 @@ struct Index {
   // @State message: string = 'Hello World';
   private tabsController : TabsController = new TabsController();
   @State currentIndex: number = 0;
+  private breakpointSystem: BreakpointSystem = new BreakpointSystem();
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
+
   @Builder
   tabBarBuilder(title: string, targetIndex: number, selectedIcon: Resource, unselectIcon: Resource) {
     Column() {
@@ -34,7 +38,9 @@ struct Index {
     })
   }
   build() {
-    Tabs({ barPosition: BarPosition.End, controller: this.tabsController } ){
+    Tabs({ barPosition: this.currentBreakpoint === BreakpointTypeEnum.LG ?
+      BarPosition.Start :
+      BarPosition.End, controller: this.tabsController } ){
       TabContent() {
         QuickStartPage()
       }
@@ -51,12 +57,20 @@ struct Index {
       .tabBar(this.tabBarBuilder('知识地图', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
     }
     .scrollable(false)
-    .vertical(false)
+    .vertical(this.currentBreakpoint === BreakpointTypeEnum.LG ? true : false)
     .divider({
       strokeWidth: 0.5,
       color: '#0D182431'
     })
     .backgroundColor('#F1F3F5')
     .padding({ top: 36, bottom: 28 })
+  }
+
+  aboutToAppear() {
+    this.breakpointSystem.register();
+  }
+
+  aboutToDisappear() {
+    this.breakpointSystem.unregister();
   }
 }

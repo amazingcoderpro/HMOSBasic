@@ -1,3 +1,5 @@
+import { BreakpointType, BreakpointTypeEnum } from 'utils';
+
 interface KnowledgeBaseItem {
   type: string,
   title: string
@@ -24,6 +26,7 @@ const TypeMapIcon: Record<string, string> = {
 @Component
 export struct KnowledgeMapContent {
   scroller: Scroller = new Scroller();
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointTypeEnum.MD;
   @Prop  section: Section;
   //   = {
   //   "title": "准备与学习",
@@ -107,6 +110,7 @@ export struct KnowledgeMapContent {
         endMargin: 0,
         color: '#F2F2F2'
       })
+      .lanes(new BreakpointType<number>({ sm:1, md: 1, lg: 2, xl: 2 }).getValue(this.currentBreakpoint))
     }
     .width('100%')
     .margin({ top: 28 })
