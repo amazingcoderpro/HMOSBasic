@@ -5,6 +5,7 @@ import { ArticleDetailPage } from './ArticleDetailPage';
 import { ArticleClass } from '../model/ArticleClass';
 import { BannerClass } from '../model/BannerClass';
 import { BannerDetailPage } from './BannerDetailPage';
+import { Header } from '../view/Header';
 
 @Component
 export struct QuickStartPage {
@@ -22,13 +23,14 @@ export struct QuickStartPage {
   build() {
     Navigation(this.articlePathStack) {
       Column() {
-        Text(this.message)
-          .fontSize(24)
-          .fontWeight(700)
-          .width('100%')
-          .padding({'left': 16})
-          .fontFamily('HarmonyHeiTi-Bold')
-          .lineHeight(33)
+        // Text(this.message)
+        //   .fontSize(24)
+        //   .fontWeight(700)
+        //   .width('100%')
+        //   .padding({'left': 16})
+        //   .fontFamily('HarmonyHeiTi-Bold')
+        //   .lineHeight(33)
+        Header()
         Scroll() {
           Column() {
             Banner()
